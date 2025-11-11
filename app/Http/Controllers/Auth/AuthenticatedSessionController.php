@@ -16,7 +16,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('template-wmotors.pages.login');
     }
 
     /**
@@ -28,7 +28,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Redirecionar para onde o usuário queria ir ou para admin
+        $redirectTo = $request->input('redirect_to', route('admin.veiculos'));
+        return redirect($redirectTo);
     }
 
     /**

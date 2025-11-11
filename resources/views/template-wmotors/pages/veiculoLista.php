@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 <body>
-  <!-- HEADER -->
   <header class="header">
     <nav class="navbar container">
       <div class="logo">
@@ -23,10 +22,8 @@
     </nav>
   </header>
 
-  <!-- CONTEÚDO -->
   <div class="container mt-4">
     <div class="row">
-      <!-- SIDEBAR FILTROS -->
       <div class="col-lg-3">
         <div class="filtros-sidebar">
           <h3>Filtros <button class="btn btn-sm btn-outline-secondary" onclick="limparFiltros()">✕</button></h3>
@@ -65,7 +62,6 @@
         </div>
       </div>
 
-      <!-- GRID DE VEÍCULOS -->
       <div class="col-lg-9">
         <div class="mb-4">
           <h2>Veículos Disponíveis</h2>
@@ -77,13 +73,11 @@
         </div>
 
         <div class="veiculo-grid" id="veiculosGrid">
-          <!-- Preenchido por JavaScript -->
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer class="footer mt-5">
     <div class="container">
       <div class="footer-grid">
@@ -190,20 +184,17 @@
       window.location.href = `detalhe?id=${id}`;
     }
 
-    // Aplicar filtros ao digitar
     document.getElementById('filtroTexto').addEventListener('keyup', aplicarFiltros);
     document.getElementById('filtroMarca').addEventListener('change', aplicarFiltros);
     document.getElementById('filtroAnoMin').addEventListener('change', aplicarFiltros);
     document.getElementById('filtroPrecoMax').addEventListener('change', aplicarFiltros);
 
-    // Carregar com filtro de busca da URL
     const params = new URLSearchParams(window.location.search);
     const busca = params.get('busca');
     if (busca) {
       document.getElementById('filtroTexto').value = busca;
     }
 
-    // Carregar veículos ao abrir
     aplicarFiltros();
   </script>
 </body>

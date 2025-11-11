@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 <body>
-  <!-- HEADER -->
   <header class="header">
     <nav class="navbar container">
       <div class="logo">
@@ -23,7 +22,6 @@
     </nav>
   </header>
 
-  <!-- HERO BANNER -->
   <section class="hero">
     <div class="container">
       <h1>Encontre seu Carro Perfeito</h1>
@@ -36,7 +34,6 @@
     </div>
   </section>
 
-  <!-- RECURSOS -->
   <section class="container mt-5">
     <div class="recursos">
       <div class="recurso-card">
@@ -57,7 +54,6 @@
     </div>
   </section>
 
-  <!-- VEÍCULOS EM DESTAQUE -->
   <section class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
@@ -67,7 +63,6 @@
     </div>
 
     <div class="veiculo-grid" id="veiculosDestaque">
-      <!-- Preenchido por JavaScript -->
     </div>
 
     <div class="text-center mt-4">
@@ -75,7 +70,6 @@
     </div>
   </section>
 
-  <!-- CTA SECTION -->
   <section class="container mt-5">
     <div class="cta-section">
       <h2>Quer Vender seu Carro?</h2>
@@ -84,7 +78,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -130,7 +123,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../js/dados.js"></script>
   <script>
-    // Carregar veículos em destaque (6 mais visualizados)
     function carregarDestaque() {
       const destaque = obterTodosVeiculos()
         .sort((a, b) => b.visualizacoes - a.visualizacoes)
@@ -174,12 +166,10 @@
       window.location.href = `Detalhe?id=${id}`;
     }
 
-    // Permitir Enter na busca
     document.getElementById('buscaHome').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') buscarVeiculos();
     });
 
-    // Carregar ao abrir a página
     carregarDestaque();
   </script>
 </body>

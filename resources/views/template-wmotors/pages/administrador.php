@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 <body>
-  <!-- HEADER -->
   <header class="header">
     <nav class="navbar container">
       <div class="logo">
@@ -23,14 +22,12 @@
     </nav>
   </header>
 
-  <!-- CONTEÚDO -->
   <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1>Dashboard Administrativo</h1>
       <button class="btn btn-primario" onclick="abrirModalAdicionar()">+ Adicionar Veículo</button>
     </div>
 
-    <!-- ESTATÍSTICAS -->
     <div class="dashboard-grid">
       <div class="stat-card">
         <div class="stat-info">
@@ -65,7 +62,6 @@
       </div>
     </div>
 
-    <!-- TABELA DE VEÍCULOS -->
     <div class="card mt-4">
       <div class="card-body">
         <h5 class="card-title">Gerenciamento de Veículos</h5>
@@ -83,7 +79,6 @@
               </tr>
             </thead>
             <tbody id="tabelaVeiculos">
-              <!-- Preenchido por JavaScript -->
             </tbody>
           </table>
         </div>
@@ -91,7 +86,6 @@
     </div>
   </div>
 
-  <!-- MODAL ADICIONAR/EDITAR / Com laravel -->
   <div class="modal" id="modalVeiculo">
     <div class="modal-conteudo">
       <button class="modal-fechar" onclick="fecharModal()">&times;</button>
@@ -186,7 +180,6 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer class="footer mt-5">
     <div class="container">
       <div class="footer-grid">
@@ -330,13 +323,11 @@
       };
 
       if (veiculoEditandoId) {
-        // Editar
         const index = veiculosEditaveis.findIndex(v => v.id === veiculoEditandoId);
         if (index !== -1) {
           veiculosEditaveis[index] = { ...veiculosEditaveis[index], ...dados };
         }
       } else {
-        // Adicionar
         const novoId = Math.max(...veiculosEditaveis.map(v => v.id), 0) + 1;
         const novoVeiculo = {
           id: novoId,
@@ -362,14 +353,12 @@
       }
     }
 
-    // Fechar modal ao clicar fora
     document.getElementById('modalVeiculo').addEventListener('click', (e) => {
       if (e.target.id === 'modalVeiculo') {
         fecharModal();
       }
     });
 
-    // Carregar ao abrir
     carregarDashboard();
   </script>
 </body>

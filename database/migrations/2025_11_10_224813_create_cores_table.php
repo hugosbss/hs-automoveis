@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('foto_veiculos', function (Blueprint $table) {
+        Schema::create('cores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('veiculo_id');
-            $table->string('url');
+            $table->string('nome')->unique();
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('foto_veiculos');
+        Schema::dropIfExists('cores');
     }
 };

@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 <body>
-  <!-- HEADER -->
   <header class="header">
     <nav class="navbar container">
       <div class="logo">
@@ -23,10 +22,8 @@
     </nav>
   </header>
 
-  <!-- CONTEÚDO -->
   <div class="container mt-4" id="conteudo">
     <div class="row">
-      <!-- GALERIA -->
       <div class="col-lg-7">
         <div class="galeria-principal">
           <img id="imagemPrincipal" src="" alt="Veículo" style="width: 100%; height: 100%; object-fit: cover;">
@@ -38,17 +35,13 @@
         </div>
 
         <div class="galeria-thumbnails" id="thumbnails">
-          <!-- Preenchido por JavaScript -->
         </div>
       </div>
 
-      <!-- INFORMAÇÕES -->
       <div class="col-lg-5">
         <div id="infoVeiculo">
-          <!-- Preenchido por JavaScript -->
         </div>
 
-        <!-- FORMULÁRIO DE CONTATO -->
         <div class="card mt-4">
           <div class="card-body">
             <h5 class="card-title">Interesse neste Veículo?</h5>
@@ -76,16 +69,13 @@
       </div>
     </div>
 
-    <!-- VEÍCULOS RELACIONADOS -->
     <div class="mt-5">
       <h3>Veículos Similares</h3>
       <div class="veiculo-grid" id="veiculosSimilares">
-        <!-- Preenchido por JavaScript -->
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer class="footer mt-5">
     <div class="container">
       <div class="footer-grid">

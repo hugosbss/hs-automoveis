@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Iluminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Veiculo extends Model
@@ -10,9 +10,9 @@ class Veiculo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'marca',
-        'modelo',
-        'cor',
+        'marca_id',
+        'modelo_id',
+        'cor_id',
         'ano',
         'quilometragem',
         'valor',
@@ -28,5 +28,20 @@ class Veiculo extends Model
     public function usuario()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class);
+    }
+
+    public function modelo()
+    {
+        return $this->belongsTo(Modelo::class);
+    }
+
+    public function cor()
+    {
+        return $this->belongsTo(Cor::class);
     }
 }
