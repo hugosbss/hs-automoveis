@@ -58,9 +58,3 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
-
-// Route::middleware(['auth', 'admin'])->group(function () {
-//     Route::get('/admin', [VeiculoController::class, 'index'])->name('admin.dashboard');
-//     Route::post('/admin/veiculos', [VeiculoController::class, 'store'])->name('veiculos.salvar');
-//     Route::delete('/admin/veiculos/{id}', [VeiculoController::class, 'destroy'])->name('veiculos.excluir');
-// });

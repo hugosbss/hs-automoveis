@@ -13,6 +13,11 @@ class CorController extends Controller
         return response()->json($cores);
     }
 
+    public function edit(Cor $cor)
+    {
+        return view('template-wmotors.pages.cor-form', compact('cor'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -20,7 +25,7 @@ class CorController extends Controller
         ]);
 
         $cor = Cor::create($validated);
-        return response()->json($cor, 201);
+        return redirect()->route('admin.veiculos')->with('success', 'Cor criada com sucesso!');
     }
 
     public function update(Request $request, Cor $cor)
@@ -30,12 +35,12 @@ class CorController extends Controller
         ]);
 
         $cor->update($validated);
-        return response()->json($cor);
+        return redirect()->route('admin.veiculos')->with('success', 'Cor atualizada com sucesso!');
     }
 
     public function destroy(Cor $cor)
     {
         $cor->delete();
-        return response()->json(['message' => 'Cor deletada com sucesso']);
+        return redirect()->route('admin.veiculos')->with('success', 'Deletado com sucesso!');
     }
 }

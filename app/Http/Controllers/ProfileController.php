@@ -12,11 +12,21 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
+     * Display the user's profile information.
+     */
+    public function show(Request $request): View
+    {
+        return view('perfil.index', [
+            'user' => $request->user(),
+        ]);
+    }
+
+    /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('perfil.editar', [
             'user' => $request->user(),
         ]);
     }
@@ -34,7 +44,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('perfil.index', $request->user()->id)->with('status', 'perfil atualizado');
     }
 
     /**

@@ -19,7 +19,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('perfil.criar');
     }
 
     /**
@@ -44,7 +44,6 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('admin')->with('success', 'Usuário cadastrado com sucesso!');
     }
 }

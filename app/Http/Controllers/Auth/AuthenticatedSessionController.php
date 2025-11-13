@@ -28,7 +28,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Redirecionar para onde o usuário queria ir ou para admin
         $redirectTo = $request->input('redirect_to', route('admin.veiculos'));
         return redirect($redirectTo);
     }

@@ -20,6 +20,13 @@ class ModeloController extends Controller
         return response()->json($modelos);
     }
 
+    public function edit(Modelo $modelo)
+    {
+        $marcas = Marca::orderBy('nome')->get();
+        $modelo->load('marca');
+        return view('template-wmotors.pages.modelo-form', compact('modelo', 'marcas'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -28,7 +35,7 @@ class ModeloController extends Controller
         ]);
 
         $modelo = Modelo::create($validated);
-        return response()->json($modelo->load('marca'), 201);
+        return redirect()->route('admin.veiculos')->with('success', 'Modelo cadastrado com sucesso!');
     }
 
     public function update(Request $request, Modelo $modelo)
@@ -39,7 +46,7 @@ class ModeloController extends Controller
         ]);
 
         $modelo->update($validated);
-        return response()->json($modelo->load('marca'));
+        return redirect()->route('admin.veiculos')->with('success', 'Modelo atualizado com sucesso!');
     }
 
     public function destroy(Modelo $modelo)

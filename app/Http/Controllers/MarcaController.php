@@ -13,6 +13,11 @@ class MarcaController extends Controller
         return response()->json($marcas);
     }
 
+    public function edit(Marca $marca)
+    {
+        return view('template-wmotors.pages.marca-form', compact('marca'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -20,7 +25,8 @@ class MarcaController extends Controller
         ]);
 
         $marca = Marca::create($validated);
-        return response()->json($marca, 201);
+        
+        return redirect()->route('admin.veiculos')->with('success', 'Marca "' . $marca->nome . '" criada com sucesso!');
     }
 
     public function update(Request $request, Marca $marca)
@@ -30,7 +36,7 @@ class MarcaController extends Controller
         ]);
 
         $marca->update($validated);
-        return response()->json($marca);
+        return redirect()->route('admin.veiculos')->with('success', 'Marca atualizada com sucesso!');
     }
 
     public function destroy(Marca $marca)

@@ -68,19 +68,23 @@ class VeiculoController extends Controller
         return view('template-wmotors.pages.administrador', compact('veiculos', 'marcas', 'modelos', 'cores'));
     }
 
-    public function getVeiculoJson(Veiculo $veiculo)
+    public function create()
     {
-        return response()->json([
-            'id' => $veiculo->id,
-            'marca_id' => $veiculo->marca_id,
-            'modelo_id' => $veiculo->modelo_id,
-            'cor_id' => $veiculo->cor_id,
-            'ano' => $veiculo->ano,
-            'quilometragem' => $veiculo->quilometragem,
-            'valor' => $veiculo->valor,
-            'descricao' => $veiculo->descricao,
-            'fotos' => $veiculo->fotos->pluck('url')->toArray(),
-        ]);
+        $marcas = Marca::orderBy('nome')->get();
+        $modelos = Modelo::with('marca')->orderBy('nome')->get();
+        $cores = Cor::orderBy('nome')->get();
+        
+        return view('template-wmotors.pages.veiculo-form', compact('marcas', 'modelos', 'cores'));
+    }
+
+    public function edit(Veiculo $veiculo)
+    {
+        $veiculo->load(['marca', 'modelo', 'cor', 'fotos']);
+        $marcas = Marca::orderBy('nome')->get();
+        $modelos = Modelo::with('marca')->orderBy('nome')->get();
+        $cores = Cor::orderBy('nome')->get();
+        
+        return view('template-wmotors.pages.veiculo-form', compact('veiculo', 'marcas', 'modelos', 'cores'));
     }
 
     public function store(Request $request)
@@ -147,7 +151,13 @@ class VeiculoController extends Controller
 
     public function destroy(Veiculo $veiculo)
     {
+        try {
+        
         $veiculo->delete();
-        return redirect()->route('admin.veiculos')->with('success', 'Veículo deletado com sucesso!');
+        return redirect()->route('admin.veiculos')->with('toast_success', 'Veículo deletado com sucesso!');
+
+        } catch (\Exception $e) {
+            return redirect()->route('admin.veiculos')->with('toast_error', 'Erro ao deletar veículo: $veiculo->id');
+        }
     }
 }

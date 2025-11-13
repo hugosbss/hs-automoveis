@@ -5,7 +5,7 @@
 @section('content')
   <div class="container mt-4">
     @if(session('success'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <div class="alert alert-success alert-dismissible fade show">
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
@@ -89,7 +89,7 @@
 
               <div class="mt-4 text-center">
                 <p class="text-muted mb-0">
-                  <small>Credenciais padrão: admin@admin.com / 123456</small>
+                  <small>admin@admin.com / 123456</small>
                 </p>
               </div>
             </div>
@@ -99,7 +99,7 @@
     @else
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Dashboard Administrativo</h1>
-        <button class="btn btn-primario" onclick="abrirModalAdicionar()">+ Adicionar Veículo</button>
+        <a href="{{ route('admin.veiculos.criar') }}" class="btn btn-primario">+ Adicionar Veículo</a>
       </div>
 
       <div class="dashboard-grid">
@@ -174,10 +174,10 @@
                       <td>{{ $veiculo->cor->nome }}</td>
                       <td>{{ $veiculo->ano }}</td>
                       <td>{{ number_format($veiculo->quilometragem, 0, ',', '.') }} km</td>
-                      <td>R$ {{ number_format($veiculo->valor, 2, ',', '.') }}</td>
+                      <td>{{ number_format($veiculo->valor, 2, ',', '.') }}</td>
                       <td>
-                        <button class="btn btn-sm btn-warning" onclick="abrirModalEditar({{ $veiculo->id }})">Editar</button>
-                        <form action="{{ route('admin.veiculos.destroy', $veiculo) }}" method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza?')">
+                        <a href="{{ route('admin.veiculos.editar', $veiculo) }}" class="btn btn-sm btn-warning">Editar</a>
+                        <form action="{{ route('admin.veiculos.destroy', $veiculo) }}" method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir este veículo? Esta ação é irreversível.');">
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-sm btn-danger">Deletar</button>
@@ -200,7 +200,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Gerenciar Marcas</h5>
-            <form id="formMarca" class="mb-3">
+            <form id="formMarca" action="{{ route('admin.marcas.store') }}" method="POST" class="mb-3">
               @csrf
               <div class="input-group">
                 <input type="text" name="nome" id="marcaNome" class="form-control" placeholder="Nome da marca" required>
@@ -220,8 +220,12 @@
                     <tr id="marca-{{ $marca->id }}">
                       <td>{{ $marca->nome }}</td>
                       <td>
-                        <button class="btn btn-sm btn-warning" onclick="editarMarca({{ $marca->id }}, '{{ $marca->nome }}')">Editar</button>
-                        <button class="btn btn-sm btn-danger" onclick="deletarMarca({{ $marca->id }})">Deletar</button>
+                        <a href="{{ route('admin.marcas.editar', $marca) }}" class="btn btn-sm btn-warning">Editar</a>
+                        <form action="{{ route('admin.marcas.destroy', $marca) }}" method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza?')">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-sm btn-danger">Deletar</button>
+                        </form>
                       </td>
                     </tr>
                   @endforeach
@@ -236,7 +240,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Gerenciar Modelos</h5>
-            <form id="formModelo" class="mb-3">
+            <form id="formModelo" action="{{ route('admin.modelos.store') }}" method="POST" class="mb-3">
               @csrf
               <div class="row">
                 <div class="col-md-6">
@@ -270,8 +274,12 @@
                       <td>{{ $modelo->marca->nome }}</td>
                       <td>{{ $modelo->nome }}</td>
                       <td>
-                        <button class="btn btn-sm btn-warning" onclick="editarModelo({{ $modelo->id }}, {{ $modelo->marca_id }}, '{{ $modelo->nome }}')">Editar</button>
-                        <button class="btn btn-sm btn-danger" onclick="deletarModelo({{ $modelo->id }})">Deletar</button>
+                        <a href="{{ route('admin.modelos.editar', $modelo) }}" class="btn btn-sm btn-warning">Editar</a>
+                        <form action="{{ route('admin.modelos.destroy', $modelo) }}" method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza?')">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-sm btn-danger">Deletar</button>
+                        </form>
                       </td>
                     </tr>
                   @endforeach
@@ -286,7 +294,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Gerenciar Cores</h5>
-            <form id="formCor" class="mb-3">
+            <form id="formCor" action="{{ route('admin.cores.store') }}" method="POST" class="mb-3">
               @csrf
               <div class="input-group">
                 <input type="text" name="nome" id="corNome" class="form-control" placeholder="Nome da cor" required>
@@ -306,8 +314,12 @@
                     <tr id="cor-{{ $cor->id }}">
                       <td>{{ $cor->nome }}</td>
                       <td>
-                        <button class="btn btn-sm btn-warning" onclick="editarCor({{ $cor->id }}, '{{ $cor->nome }}')">Editar</button>
-                        <button class="btn btn-sm btn-danger" onclick="deletarCor({{ $cor->id }})">Deletar</button>
+                        <a href="{{ route('admin.cores.editar', $cor) }}" class="btn btn-sm btn-warning">Editar</a>
+                        <form action="{{ route('admin.cores.destroy', $cor) }}" method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza?')">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-sm btn-danger">Deletar</button>
+                        </form>
                       </td>
                     </tr>
                   @endforeach
@@ -319,95 +331,6 @@
       </div>
       </div>
     </div>
-  <div class="modal" id="modalVeiculo">
-    <div class="modal-conteudo">
-      <button class="modal-fechar" onclick="fecharModal()">&times;</button>
-      <h3 id="modalTitulo">Adicionar Veículo</h3>
-      
-      <form id="formVeiculo" method="POST">
-        @csrf
-        <input type="hidden" name="_method" id="formMethod" value="POST">
-        <input type="hidden" name="veiculo_id" id="veiculoId">
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="formulario-grupo">
-              <label>Marca *</label>
-              <select name="marca_id" id="formMarcaId" required>
-                <option value="">Selecione</option>
-                @foreach($marcas as $marca)
-                  <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="formulario-grupo">
-              <label>Modelo *</label>
-              <select name="modelo_id" id="formModeloId" required>
-                <option value="">Selecione</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="formulario-grupo">
-              <label>Cor *</label>
-              <select name="cor_id" id="formCorId" required>
-                <option value="">Selecione</option>
-                @foreach($cores as $cor)
-                  <option value="{{ $cor->id }}">{{ $cor->nome }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="formulario-grupo">
-              <label>Ano *</label>
-              <input type="number" name="ano" id="formAno" min="1900" max="{{ date('Y') + 1 }}" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="formulario-grupo">
-              <label>Quilometragem *</label>
-              <input type="number" name="quilometragem" id="formQuilometragem" min="0" required>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="formulario-grupo">
-              <label>Valor *</label>
-              <input type="number" name="valor" id="formValor" step="0.01" min="0" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="formulario-grupo">
-          <label>URL Foto 1 *</label>
-          <input type="url" name="fotos[]" class="foto-input" required>
-        </div>
-        <div class="formulario-grupo">
-          <label>URL Foto 2 *</label>
-          <input type="url" name="fotos[]" class="foto-input" required>
-        </div>
-        <div class="formulario-grupo">
-          <label>URL Foto 3 *</label>
-          <input type="url" name="fotos[]" class="foto-input" required>
-        </div>
-
-        <div class="formulario-grupo">
-          <label>Descrição</label>
-          <textarea name="descricao" id="formDescricao" rows="3"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primario btn-bloco">Salvar Veículo</button>
-      </form>
-    </div>
-  </div>
     @endif
   </div>
 @endsection
@@ -415,201 +338,7 @@
 @push('scripts')
 @if(auth()->check())
 <script>
-  let veiculoEditandoId = null;
   const modelos = @json($modelos->groupBy('marca_id'));
-
-  const formMarcaId = document.getElementById('formMarcaId');
-  if (formMarcaId) {
-    formMarcaId.addEventListener('change', function() {
-    const marcaId = this.value;
-    const modeloSelect = document.getElementById('formModeloId');
-    modeloSelect.innerHTML = '<option value="">Selecione</option>';
-    
-    if (marcaId && modelos[marcaId]) {
-      modelos[marcaId].forEach(modelo => {
-        const option = document.createElement('option');
-        option.value = modelo.id;
-        option.textContent = modelo.nome;
-        modeloSelect.appendChild(option);
-      });
-    }
-    });
-  }
-
-  const formVeiculo = document.getElementById('formVeiculo');
-  if (formVeiculo) {
-    formVeiculo.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const method = document.getElementById('formMethod').value;
-    const veiculoId = document.getElementById('veiculoId').value;
-    
-    let url = '{{ route("admin.veiculos.store") }}';
-    if (method === 'PUT' && veiculoId) {
-      url = '{{ route("admin.veiculos.update", ":id") }}'.replace(':id', veiculoId);
-      formData.append('_method', 'PUT');
-    }
-
-    fetch(url, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '{{ csrf_token() }}'
-      }
-    })
-    .then(response => {
-      if (response.redirected) {
-        window.location.href = response.url;
-      } else {
-        return response.json();
-      }
-    })
-    .catch(error => {
-      console.error('Erro:', error);
-      alert('Erro ao salvar veículo');
-    });
-  });
-
-  function abrirModalAdicionar() {
-    const modal = document.getElementById('modalVeiculo');
-    if (!modal) return;
-    
-    veiculoEditandoId = null;
-    const modalTitulo = document.getElementById('modalTitulo');
-    const formMethod = document.getElementById('formMethod');
-    const veiculoId = document.getElementById('veiculoId');
-    const form = document.getElementById('formVeiculo');
-    const modeloSelect = document.getElementById('formModeloId');
-    
-    if (modalTitulo) modalTitulo.textContent = 'Adicionar Veículo';
-    if (formMethod) formMethod.value = 'POST';
-    if (veiculoId) veiculoId.value = '';
-    if (form) form.reset();
-    if (modeloSelect) modeloSelect.innerHTML = '<option value="">Selecione</option>';
-    modal.classList.add('ativo');
-  }
-
-  function abrirModalEditar(id) {
-    fetch(`{{ route('admin.veiculos.get', ':id') }}`.replace(':id', id))
-      .then(response => response.json())
-      .then(data => {
-        veiculoEditandoId = id;
-        document.getElementById('modalTitulo').textContent = 'Editar Veículo';
-        document.getElementById('formMethod').value = 'PUT';
-        document.getElementById('veiculoId').value = id;
-        document.getElementById('formMarcaId').value = data.marca_id;
-        document.getElementById('formMarcaId').dispatchEvent(new Event('change'));
-        setTimeout(() => {
-          document.getElementById('formModeloId').value = data.modelo_id;
-        }, 200);
-        document.getElementById('formCorId').value = data.cor_id;
-        document.getElementById('formAno').value = data.ano;
-        document.getElementById('formQuilometragem').value = data.quilometragem;
-        document.getElementById('formValor').value = data.valor;
-        document.getElementById('formDescricao').value = data.descricao || '';
-        
-        const fotoInputs = document.querySelectorAll('.foto-input');
-        data.fotos.forEach((url, index) => {
-          if (fotoInputs[index]) {
-            fotoInputs[index].value = url;
-          } else {
-            const newInput = document.createElement('input');
-            newInput.type = 'url';
-            newInput.name = 'fotos[]';
-            newInput.className = 'form-control foto-input';
-            newInput.value = url;
-            document.querySelector('.formulario-grupo:last-of-type').appendChild(newInput);
-          }
-        });
-        
-        document.getElementById('modalVeiculo').classList.add('ativo');
-      });
-  }
-
-  function fecharModal() {
-    const modal = document.getElementById('modalVeiculo');
-    if (modal) modal.classList.remove('ativo');
-  }
-  document.getElementById('formMarca').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    fetch('{{ route("admin.marcas.store") }}', {
-      method: 'POST',
-      body: formData,
-      headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
-    })
-    .then(response => response.json())
-    .then(data => {
-      location.reload();
-    });
-  });
-
-  function deletarMarca(id) {
-    if (confirm('Tem certeza?')) {
-      fetch(`/admin/marcas/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'X-CSRF-TOKEN': '{{ csrf_token() }}',
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(() => location.reload());
-    }
-  }
-  document.getElementById('formModelo').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    fetch('{{ route("admin.modelos.store") }}', {
-      method: 'POST',
-      body: formData,
-      headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
-    })
-    .then(response => response.json())
-    .then(data => location.reload());
-  });
-
-  function deletarModelo(id) {
-    if (confirm('Tem certeza?')) {
-      fetch(`/admin/modelos/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
-      })
-      .then(() => location.reload());
-    }
-  }
-
-  document.getElementById('formCor').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    fetch('{{ route("admin.cores.store") }}', {
-      method: 'POST',
-      body: formData,
-      headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
-    })
-    .then(response => response.json())
-    .then(data => location.reload());
-  });
-
-  function deletarCor(id) {
-    if (confirm('Tem certeza?')) {
-      fetch(`/admin/cores/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
-      })
-      .then(() => location.reload());
-    }
-  }
-
-  const modalVeiculo = document.getElementById('modalVeiculo');
-  if (modalVeiculo) {
-    modalVeiculo.addEventListener('click', (e) => {
-      if (e.target.id === 'modalVeiculo') fecharModal();
-    });
-  }
 </script>
 @endif
 @endpush

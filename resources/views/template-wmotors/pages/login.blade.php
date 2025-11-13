@@ -9,8 +9,7 @@
         <div class="card shadow">
           <div class="card-body p-5">
             <div class="text-center mb-4">
-              <h2 class="card-title mb-2">Login</h2>
-              <p class="text-muted">Acesse sua conta administrativa</p>
+              <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
             </div>
 
             @if (session('status'))
@@ -80,6 +79,10 @@
                 </label>
               </div>
 
+              <div class="row mb-4 px-3">
+                <small class="font-weight-bold">Não tem uma conta? <a href="{{ route('perfil.criar') }}" class="text-danger ">Registrar</a></small>
+              </div>
+
               @if (Route::has('password.request'))
                 <div class="formulario-grupo text-end">
                   <a href="{{ route('password.request') }}" style="text-decoration: none; color: var(--cor-primaria);">
@@ -97,7 +100,7 @@
 
             <div class="mt-4 text-center">
               <p class="text-muted mb-0">
-                <small>Credenciais padrão: admin@admin.com / 123456</small>
+                <small>Usuario padrão: admin@admin.com / 123456</small>
               </p>
             </div>
           </div>
@@ -106,4 +109,3 @@
     </div>
   </div>
 @endsection
-

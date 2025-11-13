@@ -504,19 +504,18 @@ body {
   opacity: 0.9;
 }
 
-/* ===== FOOTER ===== */
 .footer {
   background: #1f2937;
   color: #d1d5db;
   padding: 3rem 0;
   margin-top: 4rem;
+  bottom: 0;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
-  margin-bottom: 2rem;
 }
 
 .footer-coluna h3 {
