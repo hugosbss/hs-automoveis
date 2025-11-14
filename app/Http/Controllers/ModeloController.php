@@ -52,6 +52,6 @@ class ModeloController extends Controller
     public function destroy(Modelo $modelo)
     {
         $modelo->delete();
-        return response()->json(['message' => 'Modelo deletado com sucesso']);
+        return redirect()->route('admin.veiculos')->with('Modelo deletado com sucesso');
     }
 }

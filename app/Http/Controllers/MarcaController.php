@@ -42,6 +42,6 @@ class MarcaController extends Controller
     public function destroy(Marca $marca)
     {
         $marca->delete();
-        return response()->json(['message' => 'Marca deletada com sucesso']);
+        return redirect()->route('admin.veiculos')->with('Marca deletada com sucesso');
     }
 }
