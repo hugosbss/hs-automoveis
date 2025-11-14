@@ -6,8 +6,8 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title', 'HS Automoveis')</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="{{ asset('assets/css/estilo.css') }}">
   @stack('styles')
 </head>
@@ -16,7 +16,7 @@
     <nav class="navbar container">
       <div class="logo">
         <div class="logo-icon">HS</div>
-        <a href="{{ route('home') }}" style="text-decoration: none; color: inherit;">HS Automoveis</a>
+        <a href="{{ route('home') }}" style="text-decoration: none; color: inherit;">Automoveis</a>
       </div>
       <ul class="nav-links ms-auto">
         <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'ativo' : '' }}">Home</a></li>
@@ -51,40 +51,6 @@
         </div>
     </div>
   </div>
-  
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-coluna">
-          <h3>Sobre</h3>
-          <ul>
-            <li><a href="{{ route('quem-somos') }}">Quem Somos</a></li>
-            <li><a href="{{ route('blog-index') }}">Blog</a></li>
-            <li><a href="{{ route('contato') }}">Contato</a></li>
-          </ul>
-        </div>
-        <div class="footer-coluna">
-          <h3>Comprador</h3>
-          <ul>
-            <li><a href="{{ route('como-comprar') }}">Como Comprar</a></li>
-            <li><a href="{{ route('financiamento') }}">Financiamento</a></li>
-            <li><a href="{{ route('seguro') }}">Seguro</a></li>
-          </ul>
-        </div>
-        <div class="footer-coluna">
-          <h3>Vendedor</h3>
-          <ul>
-            <li><a href="{{ route('vender-carro') }}">Vender Carro</a></li>
-            <li><a href="{{ route('minhas-vendas') }}">Minhas Vendas</a></li>
-            <li><a href="{{ route('duvidas') }}">Dúvidas</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; {{ date('Y') }} HS Automoveis. Todos os direitos reservados.</p>
-      </div>
-    </div>
-  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   @stack('scripts')

@@ -104,7 +104,7 @@
                     <p class="card-text">Entenda como utilizamos cookies para melhorar sua experiência de navegação em nosso site.</p>
                     <a href="" class="btn btn-primary">Continuar Lendo</a>
                 </div>
-            </div>
+            </div> 
         </div>
         
     </div>

@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Verificar se as colunas antigas existem antes de remover
         if (Schema::hasColumn('veiculos', 'marca')) {
             Schema::table('veiculos', function (Blueprint $table) {
                 $table->dropColumn(['marca', 'modelo', 'cor']);
             });
         }
 
-        // Adicionar foreign keys apenas se não existirem
         if (!Schema::hasColumn('veiculos', 'marca_id')) {
             Schema::table('veiculos', function (Blueprint $table) {
                 $table->foreignId('marca_id')->after('id')->constrained('marcas')->onDelete('cascade');

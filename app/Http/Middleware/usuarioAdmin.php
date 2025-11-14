@@ -15,8 +15,11 @@ class usuarioAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || auth()->user()->email !== 'admin@email.com') {
-            abort(403, 'Acesso negado.');
+        if (!auth()->check()) {
+        return redirect()->route('login');
+        }
+        if (!auth()->user()->is_admin) {
+            return redirect()->route('home')->with('error', 'Acesso negado. Você não tem permissão para acessar esta página.');
         }
         return $next($request);
     }

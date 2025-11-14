@@ -105,7 +105,6 @@
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Fotos (URLs) * - Mínimo 3 fotos</label>
               @if(isset($veiculo))
                 @foreach($veiculo->fotos as $index => $foto)
                   <div class="input-group mb-2">

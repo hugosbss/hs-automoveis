@@ -49,6 +49,9 @@ Route::get('/criar', [RegisteredUserController::class, 'create'])->name('perfil.
 Route::post('/perfil', [RegisteredUserController::class, 'store'])->name('perfil.store');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/perfil/excluir', function () {
+        return view('perfil.excluir');
+    })->name('perfil.delete');
     Route::get('/perfil/{id}', [ProfileController::class, 'show'])->name('perfil.show');
     Route::get('/editar/perfil/{id}', [ProfileController::class, 'edit'])->name('perfil.index');
     Route::get('/editar/perfil', [ProfileController::class, 'edit'])->name('perfil.editar');

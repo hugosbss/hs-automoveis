@@ -30,9 +30,7 @@
 
       <div class="col-lg-5">
         <div>
-          <span class="status-badge status-disponivel">Disponível</span>
-          <h1 class="mt-2">{{ $veiculo->marca->nome }} {{ $veiculo->modelo->nome }}</h1>
-          <p class="text-muted">{{ $veiculo->marca->nome }} {{ $veiculo->modelo->nome }} • {{ $veiculo->ano }}</p>
+          <h1 class="mt-2">{{ $veiculo->marca->nome }} {{ $veiculo->modelo->nome }}  • {{ $veiculo->ano }}</h1>
 
           <div class="card mt-3">
             <div class="card-body">
@@ -76,7 +74,7 @@
           @endif
         </div>
 
-        <div class="card mt-4">
+        {{-- <div class="card mt-4">
           <div class="card-body">
             <h5 class="card-title">Interesse neste Veículo?</h5>
             <form onsubmit="enviarMensagem(event)">
@@ -100,47 +98,38 @@
             </form>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
 
-    @php
-      $similares = \App\Models\Veiculo::where('marca_id', $veiculo->marca_id)
-        ->where('id', '!=', $veiculo->id)
-        ->with(['marca', 'modelo', 'cor', 'fotos'])
-        ->take(3)
-        ->get();
-    @endphp
-    
-    @if($similares->count() > 0)
-      <div class="mt-5">
-        <h3>Veículos Similares</h3>
-        <div class="veiculo-grid">
-          @foreach($similares as $similar)
-            <div class="veiculo-card" onclick="window.location.href='{{ route('veiculos.show', $similar) }}'" style="cursor: pointer;">
-              <img src="{{ $similar->fotos->first()->url ?? 'https://via.placeholder.com/300x200' }}" alt="{{ $similar->marca->nome }} {{ $similar->modelo->nome }}" class="veiculo-imagem">
-              <div class="veiculo-conteudo">
-                <span class="status-badge status-disponivel">Disponível</span>
-                <h3 class="veiculo-titulo">{{ $similar->marca->nome }} {{ $similar->modelo->nome }}</h3>
-                <p class="veiculo-info">{{ $similar->marca->nome }} {{ $similar->modelo->nome }} • {{ $similar->ano }}</p>
-                
-                <div class="veiculo-detalhes">
-                  <div class="detalhe">
-                    <div class="detalhe-label">Cor</div>
-                    <div class="detalhe-valor">{{ $similar->cor->nome }}</div>
-                  </div>
-                  <div class="detalhe">
-                    <div class="detalhe-label">KM</div>
-                    <div class="detalhe-valor">{{ number_format($similar->quilometragem, 0, ',', '.') }} km</div>
-                  </div>
+    {{-- carrossel veiculos similares --}}
+    @if ($similares->count())
+    <div class="mt-3">
+        <h3 class="mb-3">Veículos similares</h3>
+
+        <div class="row">
+            @foreach($similares as $item)
+                <div class="col-md-3 mb-3">
+                    <div class="card shadow-sm"
+                         onclick="window.location.href='{{ route('veiculos.show', $item->id) }}'"
+                         style="cursor:pointer">
+
+                        <img src="{{ $item->fotos->first()->url ?? 'https://via.placeholder.com/300x200' }}"
+                             class="card-img-top"
+                             style="height:140px; object-fit:cover;">
+
+                        <div class="card-body">
+                            <h6 class="fw-bold">
+                                {{ $item->marca->nome }} {{ $item->modelo->nome }}
+                            </h6>
+                            <small>{{ $item->ano }} - {{ number_format($item->valor, 2, ',', '.') }}</small>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="veiculo-preco">R$ {{ number_format($similar->valor, 2, ',', '.') }}</div>
-              </div>
-            </div>
-          @endforeach
+            @endforeach
         </div>
-      </div>
+    </div>
     @endif
+
   </div>
 @endsection
 

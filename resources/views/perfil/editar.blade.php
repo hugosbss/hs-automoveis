@@ -34,32 +34,12 @@
                             @enderror
                         </div>
 
-                        @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                            <div class="alert alert-info" role="alert">
-                                <p class="mb-2">Seu endereço de email não foi verificado.</p>
-                                <form id="send-verification" method="post" action="{{ route('verification.send') }}" style="display: inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-info">
-                                        Clique aqui para reenviar o email de verificação
-                                    </button>
-                                </form>
-
-                                @if (session('status') === 'verification-link-sent')
-                                    <p class="mt-2 text-success">
-                                        Um novo link de verificação foi enviado para seu endereço de email.
-                                    </p>
-                                @endif
-                            </div>
-                        @endif
-
-                        @if (session('status') === 'profile-updated')
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                            <a href="{{ route('perfil.index', auth()->id()) }}" class="btn btn-secondary">Cancelar</a>
+                            <a href="{{ route('perfil.show', auth()->id()) }}" class="btn btn-secondary">Cancelar</a>
                         </div>
-                        @endif
 
-                        @if (session('status') === 'profile-updated')
+                        @if (session('status') === 'perfil atualizado')
                             <div class="alert alert-success mt-3" role="alert">
                                 Perfil atualizado com sucesso!
                             </div>
@@ -105,10 +85,12 @@
                         </div>
 
                         <div class="d-flex gap-2 align-items-center">
-                            <button type="submit" class="btn btn-primary">Salvar Senha</button>
+                            <button type="submit" class="btn btn-primary" id="saveSenhaBtn">Salvar Senha</button>
                             
                             @if (session('status') === 'password-updated')
-                                <p class="text-success m-0">Salvo!</p>
+                                <div class="alert alert-success mt-2 mb-0" role="alert">
+                                    Senha atualizada com sucesso!
+                                </div>
                             @endif
                         </div>
                     </form>
@@ -125,39 +107,14 @@
                         Antes de excluir, você deve digitar sua senha para confirmar a ação.
                     </p>
                     
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                        Excluir Conta
-                    </button>
+                    <a href="{{ route('perfil.delete') }}">
+                        <button type="submit" class="btn btn-danger">
+                            Excluir conta
+                        </button>
+                    </a>
                 </div>
             </div>
             
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmação de Exclusão</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form method="post" action="{{ route('profile.destroy') }}">
-                @csrf
-                @method('delete')
-                <div class="modal-body">
-                    <p>Tem certeza que deseja excluir sua conta? Por favor, **digite sua senha** para confirmar que deseja apagar sua conta permanentemente.</p>
-                    
-                    <div class="mb-3">
-                        <label for="password_delete" class="form-label">Senha</label>
-                        <input type="password" name="password" class="form-control" id="password_delete" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>

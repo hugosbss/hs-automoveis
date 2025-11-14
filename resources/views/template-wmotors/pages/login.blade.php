@@ -4,7 +4,7 @@
 
 @section('content')
   <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-5 mb-5">
       <div class="col-md-6 col-lg-5">
         <div class="card shadow">
           <div class="card-body p-5">
@@ -83,13 +83,13 @@
                 <small class="font-weight-bold">Não tem uma conta? <a href="{{ route('perfil.criar') }}" class="text-danger ">Registrar</a></small>
               </div>
 
-              @if (Route::has('password.request'))
+              {{-- @if (Route::has('password.request'))
                 <div class="formulario-grupo text-end">
                   <a href="{{ route('password.request') }}" style="text-decoration: none; color: var(--cor-primaria);">
                     Esqueceu sua senha?
                   </a>
                 </div>
-              @endif
+              @endif --}}
 
               <div class="formulario-grupo">
                 <button type="submit" class="btn btn-primario btn-bloco">
@@ -97,12 +97,6 @@
                 </button>
               </div>
             </form>
-
-            <div class="mt-4 text-center">
-              <p class="text-muted mb-0">
-                <small>Usuario padrão: admin@admin.com / 123456</small>
-              </p>
-            </div>
           </div>
         </div>
       </div>

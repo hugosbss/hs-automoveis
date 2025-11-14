@@ -86,12 +86,6 @@
                   </button>
                 </div>
               </form>
-
-              <div class="mt-4 text-center">
-                <p class="text-muted mb-0">
-                  <small>admin@admin.com / 123456</small>
-                </p>
-              </div>
             </div>
           </div>
         </div>

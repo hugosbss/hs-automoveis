@@ -45,7 +45,22 @@ class VeiculoController extends Controller
     public function show(Veiculo $veiculo)
     {
         $veiculo->load(['marca', 'modelo', 'cor', 'fotos']);
-        return view('template-wmotors.pages.veiculoDetalhe', compact('veiculo'));
+        $similares = $this->buscarSimilares($veiculo);
+
+        return view('template-wmotors.pages.veiculoDetalhe', compact('veiculo', 'similares'));
+    }
+
+    private function buscarSimilares(Veiculo $veiculo)
+    {
+        $marcaId = $veiculo->marca_id ?? $veiculo->marca->id;
+        $modeloId = $veiculo->modelo_id ?? $veiculo->modelo->id;
+
+        return \App\Models\Veiculo::where('id', '!=', $veiculo->id)
+            ->where('marca_id', $marcaId)
+            ->where('modelo_id', $modeloId)
+            ->with(['marca', 'modelo', 'fotos'])
+            ->limit(5)
+            ->get();
     }
 
     public function adminIndex()
@@ -101,7 +116,6 @@ class VeiculoController extends Controller
             'fotos.*' => 'required|url',
         ]);
 
-        $validated['usuario_id'] = auth()->id();
         $fotos = $validated['fotos'];
         unset($validated['fotos']);
 
@@ -113,7 +127,6 @@ class VeiculoController extends Controller
                 'url' => $url,
             ]);
         }
-
         return redirect()->route('admin.veiculos')->with('success', 'Veículo cadastrado com sucesso!');
     }
 
@@ -145,7 +158,6 @@ class VeiculoController extends Controller
                 ]);
             }
         }
-
         return redirect()->route('admin.veiculos')->with('success', 'Veículo atualizado com sucesso!');
     }
 

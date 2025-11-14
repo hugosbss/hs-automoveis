@@ -44,6 +44,6 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-        return redirect()->route('admin')->with('success', 'Usuário cadastrado com sucesso!');
+        return redirect()->route('admin.veiculos')->with('success', 'Usuário cadastrado com sucesso!');
     }
 }

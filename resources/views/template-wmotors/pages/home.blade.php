@@ -75,7 +75,7 @@
     </div>
   </section>
 
-  <section class="container mt-5">
+  <section class="container">
     <div class="cta-section">
       <h2>Quer Vender seu Carro?</h2>
       <p>Anuncie seu veículo gratuitamente e alcance milhares de compradores</p>
@@ -86,6 +86,8 @@
       @endauth
     </div>
   </section>
+  
+@include('components.footer')
 @endsection
 
 @push('scripts')
@@ -102,4 +104,3 @@
   });
 </script>
 @endpush
-

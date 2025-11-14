@@ -30,3 +30,10 @@ function filtrarVeiculos(filtros) {
     return marcaMatch && modeloMatch && anoMatch && precoMatch && buscaMatch;
   });
 }
+
+$('#myCarousel').carousel({
+  interval: false
+});
+$('#carousel-thumbs').carousel({
+  interval: false
+});

@@ -85,7 +85,7 @@ Aplicação Laravel com autenticação de usuário que simula um site de venda d
 - ✅ Visualização de detalhes de cada veículo
 - ✅ Filtros por marca, ano e preço
 - ✅ Busca por marca ou modelo
-- ✅ Exibição de fotos dos veículos (mínimo 3 fotos por veículo)
+- ✅ Exibição de fotos dos veículos 
 
 ### Área Administrativa
 
@@ -96,7 +96,7 @@ Aplicação Laravel com autenticação de usuário que simula um site de venda d
   - Cadastrar novos veículos com marca, modelo, cor, ano, quilometragem, valor e descrição
   - Editar informações existentes
   - Excluir registros
-  - Cada veículo deve ter no mínimo 3 fotos (URLs)
+  - Cada veículo deve ter 3 fotos (URLs)
 
 ## 🗂️ Estrutura do Projeto
 
