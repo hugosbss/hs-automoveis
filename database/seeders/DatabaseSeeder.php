@@ -18,9 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Executar seeders na ordem correta
         $this->call([
-            UsersSeeder::class,
             MarcasSeeder::class,
             ModelosSeeder::class,
             CoresSeeder::class,
