@@ -201,3 +201,59 @@ Desenvolvido como trabalho acadêmico.
 ## 📄 Licença
 
 Este projeto é um trabalho acadêmico.
+
+Crie o readme.MD para mim, o projeto foi baseado nesse escopo, 
+
+🧩 Descrição Geral
+O aluno deverá desenvolver uma aplicação em Laravel com autenticação de usuário e senha, que simule um site de venda de veículos, semelhante aos portais Carros.com.br, iCarros ou Webmotors.
+
+O sistema deverá possuir duas áreas distintas:
+
+Área Pública: onde o visitante poderá visualizar todos os veículos disponíveis para venda.
+Área Administrativa: restrita ao administrador autenticado, onde será possível gerenciar marcas, modelos, cores e veículos.
+🚘 Requisitos da Área Pública
+Exibir uma listagem com todos os veículos cadastrados.
+Cada veículo deve mostrar:
+Foto principal (imagem via link);
+Marca, modelo e cor;
+Ano de fabricação;
+Quilometragem atual;
+Valor total;
+Campo de detalhes (descrição textual).
+Ao clicar em um veículo, deve ser aberta uma página de detalhes com todas as informações e as demais fotos do carro.
+🔐 Requisitos da Área Administrativa
+Somente o administrador autenticado poderá acessar.
+Deverá conter:
+Cadastro de marcas;
+Cadastro de modelos;
+Cadastro de cores;
+Cadastro completo de veículos;
+Cada veículo deve ter no mínimo 3 fotos (armazenadas como links, não upload).
+Os campos ano, quilometragem e valor são obrigatórios.
+O administrador poderá:
+Adicionar novos veículos;
+Editar informações existentes;
+Excluir registros.
+🎨 Requisitos de Template e Layout
+O site deverá possuir um template visual (layout base), utilizando as boas práticas de uso de templates no Laravel com @section e @yield.
+Trabalhos que não utilizarem templates não serão corrigidos.
+Não adianta o site estar funcional e feio — notas maiores serão atribuídas aos trabalhos visualmente bem elaborados, com boa estética, organização e identidade visual.
+É permitido o uso de frameworks CSS.
+⚙️ Tecnologias e Regras
+O sistema deve ser desenvolvido em Laravel
+Deve conter validação de login e senha (autenticação básica Laravel).
+Banco de dados configurado e funcional (MySQL).
+É permitido o uso de Bootstrap ou outro framework CSS para estilização.
+Não é necessário upload real de imagens, apenas links (URLs) válidos.
+📤 Entrega
+
+Deve estar claro no README.md:
+Como rodar o projeto (comandos do Laravel);
+Usuário e senha de acesso do administrador.
+DEVE possuir prints (imagens), de todas as telas do site
+📚 Dica
+Utilize os recursos nativos do Laravel para:
+
+Autenticação;
+Roteamento e Controllers para separar a área pública e administrativa;
+Validação de formulários e campos obrigatórios;

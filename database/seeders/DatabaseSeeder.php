@@ -3,22 +3,29 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\UsersSeeder;
+use Database\Seeders\MarcasSeeder;
+use Database\Seeders\ModelosSeeder;
+use Database\Seeders\CoresSeeder;
+use Database\Seeders\VeiculosSeeder;
+use Database\Seeders\FotoVeiculosSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
+        // Executar seeders na ordem correta
         $this->call([
-            AdminUserSeeder::class,
-            MarcaModeloCorSeeder::class,
-            VeiculoSeeder::class,
+            UsersSeeder::class,
+            MarcasSeeder::class,
+            ModelosSeeder::class,
+            CoresSeeder::class,
+            VeiculosSeeder::class,
+            FotoVeiculosSeeder::class,
         ]);
     }
 }
