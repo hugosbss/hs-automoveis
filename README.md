@@ -1,102 +1,346 @@
-# HS Automoveis - Sistema de Venda de Veículos
+# 🚗 HS Automoveis - Sistema de Venda de Veículos
 
-Sistema desenvolvido em Laravel para gerenciamento e visualização de veículos, similar aos portais Carros.com.br, iCarros ou Webmotors.
+> **Sistema web para gerenciamento e visualização de veículos**, desenvolvido em **Laravel** com autenticação de usuário.
 
-## 📋 Descrição
+![Laravel](https://img.shields.io/badge/Laravel-11.0-FF2D20?style=flat-square&logo=laravel)
+![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?style=flat-square&logo=php)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat-square&logo=mysql)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=flat-square&logo=bootstrap)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-Aplicação Laravel com autenticação de usuário que simula um site de venda de veículos, contendo:
+---
 
-- **Área Pública**: Visualização de todos os veículos disponíveis para venda
-- **Área Administrativa**: Gerenciamento de marcas, modelos, cores e veículos (restrita a administradores)
+## 📋 Descrição Geral
+
+Aplicação Laravel com autenticação de usuário e senha que simula um site de venda de veículos. O sistema possui **duas áreas distintas**:
+
+- **🌐 Área Pública**: Onde visitantes podem visualizar todos os veículos disponíveis para venda
+- **🔐 Área Administrativa**: Restrita ao administrador autenticado, para gerenciar marcas, modelos, cores e veículos
+
+---
+
+## ✨ Funcionalidades Principais
+
+### 🌐 Área Pública
+
+- ✅ **Listagem de Veículos**: Exibe todos os veículos cadastrados com informações principais
+- ✅ **Detalhes do Veículo**: Clique em um veículo para ver todas as informações e galeria de fotos
+- ✅ **Busca e Filtros**: Busque por marca, modelo ou filtre por ano e preço
+- ✅ **Galeria de Imagens**: Visualize múltiplas fotos de cada veículo
+- ✅ **Informações Completas**: Marca, modelo, cor, ano, quilometragem, valor e descrição
+
+### 🔐 Área Administrativa
+
+- ✅ **Autenticação**: Login seguro com email e senha
+- ✅ **Gerenciamento de Marcas**: CRUD completo (Criar, Ler, Atualizar, Deletar)
+- ✅ **Gerenciamento de Modelos**: Vincule modelos a marcas
+- ✅ **Gerenciamento de Cores**: Cadastre cores disponíveis
+- ✅ **Gerenciamento de Veículos**: CRUD completo com validações
+- ✅ **Galeria de Fotos**: Adicione até 3+ fotos por veículo (via URLs)
+- ✅ **Dashboard**: Painel administrativo intuitivo
+
+---
 
 ## 🚀 Como Rodar o Projeto
 
 ### Pré-requisitos
 
-- PHP >= 8.1
-- Composer
-- MySQL
-- Node.js e NPM (opcional, para assets)
+- **PHP** >= 8.2
+- **Composer** (gerenciador de dependências PHP)
+- **MySQL** >= 8.0 (ou MariaDB)
+- **Git** (para clonar o repositório)
 
-### Instalação
+### Passo 1: Clonar o Repositório
 
-1. **Clone o repositório** (se aplicável) ou navegue até a pasta do projeto
+```bash
+# Via HTTPS
+git clone https://github.com/hugosbss/hs-automoveis.git
+cd hs-automoveis
 
-2. **Instale as dependências do Composer:**
-   ```bash
-   composer install
-   ```
+# Ou via SSH
+git clone git@github.com:hugosbss/hs-automoveis.git
+cd hs-automoveis
+```
 
-3. **Configure o arquivo .env:**
-   - Copie o arquivo `.env.example` para `.env` (se não existir)
-   - Configure as credenciais do banco de dados:
-     ```
-     DB_CONNECTION=mysql
-     DB_HOST=127.0.0.1
-     DB_PORT=3306
-     DB_DATABASE=hs_automoveis
-     DB_USERNAME=seu_usuario
-     DB_PASSWORD=sua_senha
-     ```
+### Passo 2: Instalar Dependências
 
-4. **Gere a chave da aplicação:**
-   ```bash
-   php artisan key:generate
-   ```
+```bash
+# Instalar dependências PHP
+composer install
 
-5. **Execute as migrations:**
-   ```bash
-   php artisan migrate
-   ```
-   
-   Isso criará as seguintes tabelas:
-   - `users` (usuários do sistema)
-   - `marcas` (marcas de veículos)
-   - `modelos` (modelos de veículos)
-   - `cores` (cores de veículos)
-   - `veiculos` (veículos cadastrados)
-   - `foto_veiculos` (fotos dos veículos)
+# Instalar dependências Node.js (para assets)
+npm install
+```
 
-6. **Execute o seeder para criar o usuário administrador:**
-   ```bash
-   php artisan db:seed --class=AdminUserSeeder
-   ```
+### Passo 3: Configurar o Arquivo .env
 
-7. **Inicie o servidor de desenvolvimento:**
-   ```bash
-   php artisan serve
-   ```
+```bash
+# Copiar o arquivo de exemplo
+cp .env.example .env
+```
 
-8. **Acesse a aplicação:**
-   - Abra seu navegador em: `http://localhost:8000`
+O arquivo `.env.example` já vem com as configurações básicas. Você pode ajustar conforme necessário:
 
-## 🔐 Credenciais de Acesso
+```env
+# Configurações da Aplicação
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:...
+APP_DEBUG=true
+APP_URL=http://localhost:8000
 
-### Administrador
+# Configurações do Banco de Dados
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=hs_automoveis
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-- **Email:** `admin@admin.com`
-- **Senha:** `123456`
+### Passo 4: Gerar Chave da Aplicação
 
-## 📚 Funcionalidades
+```bash
+php artisan key:generate
+```
 
-### Área Pública
+### Passo 5: Executar Migrations
 
-- ✅ Listagem de todos os veículos cadastrados
-- ✅ Visualização de detalhes de cada veículo
-- ✅ Filtros por marca, ano e preço
-- ✅ Busca por marca ou modelo
-- ✅ Exibição de fotos dos veículos 
+```bash
+# Criar as tabelas no banco de dados
+php artisan migrate
+```
 
-### Área Administrativa
+Isso criará as seguintes tabelas:
 
-- ✅ **Gerenciamento de Marcas**: Criar, editar e excluir marcas
-- ✅ **Gerenciamento de Modelos**: Criar, editar e excluir modelos (vinculados a marcas)
-- ✅ **Gerenciamento de Cores**: Criar, editar e excluir cores
-- ✅ **Gerenciamento de Veículos**: 
-  - Cadastrar novos veículos com marca, modelo, cor, ano, quilometragem, valor e descrição
-  - Editar informações existentes
-  - Excluir registros
-  - Cada veículo deve ter 3 fotos (URLs)
+| Tabela | Descrição |
+|--------|-----------|
+| `users` | Usuários do sistema (administradores) |
+| `marcas` | Marcas de veículos (Toyota, Honda, etc) |
+| `modelos` | Modelos de veículos (Corolla, Civic, etc) |
+| `cores` | Cores disponíveis (Branco, Preto, etc) |
+| `veiculos` | Veículos cadastrados |
+| `foto_veiculos` | Fotos dos veículos |
+
+### Passo 6: Popular o Banco de Dados (Seeders)
+
+```bash
+# Executar todos os seeders
+php artisan db:seed
+
+# Ou executar um seeder específico
+php artisan db:seed --class=MarcasSeeder
+php artisan db:seed --class=ModelosSeeder
+php artisan db:seed --class=CoresSeeder
+php artisan db:seed --class=VeiculosSeeder
+php artisan db:seed --class=FotoVeiculosSeeder
+```
+
+### Passo 7: Compilar Assets (Opcional)
+
+```bash
+# Compilar CSS e JavaScript
+npm run dev
+
+# Ou para produção
+npm run build
+```
+
+### Passo 8: Iniciar o Servidor
+
+```bash
+# Iniciar servidor de desenvolvimento
+php artisan serve
+```
+
+O servidor estará disponível em: **http://localhost:8000**
+---
+
+## 📸 Screenshots das Telas
+
+### 🏠 Página Inicial - Home (Parte 1)
+
+![Home 1](./docs/screenshots/home-1.jpeg)
+
+Primeira seção da página inicial com:
+- Banner principal com busca
+- Navegação do site
+- Introdução ao sistema
+
+### 🏠 Página Inicial - Home (Parte 2)
+
+![Home 2](./docs/screenshots/home-2.jpeg)
+
+Segunda seção com:
+- Veículos em destaque
+- Cards informativos
+- Chamadas para ação
+
+### 🏠 Página Inicial - Home (Parte 3)
+
+![Home 3](./docs/screenshots/home-3.jpeg)
+
+Terceira seção com:
+- Mais veículos em destaque
+- Rodapé do site
+- Informações adicionais
+
+### 🚗 Listagem de Veículos
+
+![Listagem Veículos](./docs/screenshots/listagem-veiculos.jpeg)
+
+Página de listagem com:
+- Todos os veículos cadastrados
+- Informações principais (marca, modelo, ano, preço)
+- Foto principal de cada veículo
+- Layout responsivo
+
+### 🔍 Filtro de Veículos
+
+![Filtro Veículos](./docs/screenshots/filtro-veiculos.jpeg)
+
+Sistema de filtros com:
+- Filtro por marca
+- Filtro por ano
+- Filtro por preço
+- Busca em tempo real
+
+### 📋 Detalhes do Veículo
+
+![Detalhes Veículo](./docs/screenshots/veiculo-cad.jpeg)
+
+Página de detalhes com:
+- Galeria de fotos do veículo
+- Informações completas
+- Descrição detalhada
+- Veículos similares
+
+### 🚙 Veículos Similares
+
+![Veículos Similares](./docs/screenshots/veiculos-similares.jpeg)
+
+Seção de recomendações com:
+- Veículos da mesma marca
+- Veículos com características similares
+- Links para detalhes
+
+---
+
+## 🔐 Área Administrativa
+
+### 🔑 Login do Administrador
+
+![Login Admin](./docs/screenshots/login-admin.jpeg)
+
+Tela de autenticação com:
+- Campo de email
+- Campo de senha
+- Botão de login
+- Validação de credenciais
+
+### 👤 Perfil do Administrador
+
+![Perfil Admin](./docs/screenshots/Perfil-admin.jpeg)
+
+Página de perfil com:
+- Informações do usuário
+- Opções de edição
+- Dados pessoais
+- Configurações da conta
+
+### ℹ️ Informações do Perfil
+
+![Info Perfil](./docs/screenshots/info-perfil.jpeg)
+
+Detalhes do perfil do administrador com:
+- Nome do usuário
+- Email
+- Data de criação
+- Opções de segurança
+
+---
+
+## 📊 Gerenciamento de Marcas
+
+### 📝 Lista de Marcas
+
+![Lista Marcas](./docs/screenshots/lista-marcas.jpeg)
+
+Tabela de marcas com:
+- Todas as marcas cadastradas
+- Botões de editar e deletar
+- Opção de adicionar nova marca
+- Busca e filtros
+
+### ➕ Cadastro de Marca
+
+![Cadastro Marca](./docs/screenshots/marca-cad.jpeg)
+
+Formulário para adicionar marca com:
+- Campo de nome
+- Validação de dados
+- Botão de salvar
+- Mensagens de sucesso/erro
+
+---
+
+## 📊 Gerenciamento de Modelos
+
+### 📝 Lista de Modelos
+
+![Lista Modelos](./docs/screenshots/lista-modelos.jpeg)
+
+Tabela de modelos com:
+- Todos os modelos cadastrados
+- Marca associada
+- Botões de editar e deletar
+- Opção de adicionar novo modelo
+
+### ➕ Cadastro de Modelo
+
+![Cadastro Modelo](./docs/screenshots/modelo-cad.jpeg)
+
+Formulário para adicionar modelo com:
+- Campo de nome
+- Seleção de marca
+- Validação de dados
+- Botão de salvar
+
+---
+
+## 🎨 Gerenciamento de Cores
+
+### ➕ Cadastro de Cor
+
+![Cadastro Cor](./docs/screenshots/cor-cad.jpeg)
+
+Formulário para adicionar cor com:
+- Campo de nome da cor
+- Validação de dados
+- Botão de salvar
+- Mensagens de feedback
+
+---
+
+## 🚗 Gerenciamento de Veículos
+
+### ➕ Adicionar Veículo
+
+![Adicionar Veículo](./docs/screenshots/add-veículo.jpeg)
+
+Formulário completo para cadastrar veículo com:
+- Seleção de marca
+- Seleção de modelo
+- Seleção de cor
+- Campo de ano (obrigatório)
+- Campo de quilometragem (obrigatório)
+- Campo de valor (obrigatório)
+- Campo de descrição
+- Campos para 3+ URLs de fotos
+- Validação de campos obrigatórios
+- Botão de salvar
+
+---
 
 ## 🗂️ Estrutura do Projeto
 
@@ -104,12 +348,21 @@ Aplicação Laravel com autenticação de usuário que simula um site de venda d
 hs-automoveis/
 ├── app/
 │   ├── Http/
-│   │   └── Controllers/
-│   │       ├── VeiculoController.php
-│   │       ├── MarcaController.php
-│   │       ├── ModeloController.php
-│   │       └── CorController.php
+│   │   ├── Controllers/
+│   │   │   ├── Auth/
+│   │   │   │   ├── AuthenticatedSessionController.php
+│   │   │   │   ├── RegisteredUserController.php
+│   │   │   │   └── PasswordController.php
+│   │   │   ├── CorController.php
+│   │   │   ├── FotoVeiculoController.php
+│   │   │   ├── MarcaController.php
+│   │   │   ├── ModeloController.php
+│   │   │   ├── VeiculoController.php
+│   │   │   └── ProfileController.php
+│   │   ├── Middleware/
+│   │   └── Requests/
 │   └── Models/
+│       ├── User.php
 │       ├── Veiculo.php
 │       ├── Marca.php
 │       ├── Modelo.php
@@ -117,143 +370,323 @@ hs-automoveis/
 │       └── FotoVeiculo.php
 ├── database/
 │   ├── migrations/
+│   │   ├── create_marcas_table.php
+│   │   ├── create_cores_table.php
+│   │   ├── create_modelos_table.php
+│   │   ├── create_veiculos_table.php
+│   │   └── create_foto_veiculos_table.php
 │   └── seeders/
-│       └── AdminUserSeeder.php
+│       ├── DatabaseSeeder.php
+│       ├── MarcasSeeder.php
+│       ├── ModelosSeeder.php
+│       ├── CoresSeeder.php
+│       ├── VeiculosSeeder.php
+│       └── FotoVeiculosSeeder.php
 ├── resources/
-│   └── views/
-│       ├── layouts/
-│       │   └── template.blade.php
-│       └── template-wmotors/
-│           └── pages/
-│               ├── home.blade.php
-│               ├── veiculoLista.blade.php
-│               ├── veiculoDetalhe.blade.php
-│               └── administrador.blade.php
-└── routes/
-    └── web.php
+│   ├── views/
+│   │   ├── layouts/
+│   │   │   └── template.blade.php
+│   │   ├── auth/
+│   │   │   ├── login.blade.php
+│   │   │   └── register.blade.php
+│   │   ├── template-wmotors/
+│   │   │   ├── home.blade.php
+│   │   │   ├── veiculoLista.blade.php
+│   │   │   ├── veiculoDetalhe.blade.php
+│   │   │   └── administrador.blade.php
+│   │   └── profile/
+│   │       └── edit.blade.php
+│   ├── css/
+│   │   └── app.css
+│   └── js/
+│       └── app.js
+├── routes/
+│   ├── web.php
+│   └── auth.php
+├── public/
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── config/
+├── bootstrap/
+├── storage/
+├── tests/
+├── .env.example
+├── .gitignore
+├── composer.json
+├── package.json
+└── README.md
 ```
 
-## 🎨 Tecnologias Utilizadas
+---
 
-- **Laravel** (Framework PHP)
-- **MySQL** (Banco de dados)
-- **Bootstrap 5** (Framework CSS)
-- **Blade Templates** (Sistema de templates do Laravel)
+## 🔧 Tecnologias Utilizadas
+
+| Tecnologia | Versão | Descrição |
+|-----------|--------|-----------|
+| **Laravel** | 11.0 | Framework PHP moderno |
+| **PHP** | 8.2+ | Linguagem de programação |
+| **MySQL** | 8.0 | Banco de dados relacional |
+| **Bootstrap** | 5.3 | Framework CSS responsivo |
+| **Blade** | - | Motor de templates do Laravel |
+| **Eloquent** | - | ORM do Laravel |
+
+---
 
 ## 📝 Validações Implementadas
 
-- Campos obrigatórios: ano, quilometragem e valor
-- Validação de URLs para fotos
-- Mínimo de 3 fotos por veículo
-- Validação de relacionamentos (marca, modelo, cor devem existir)
+### Campos Obrigatórios
+
+- ✅ **Veículos**: Ano, quilometragem e valor são obrigatórios
+- ✅ **Marcas**: Nome é obrigatório
+- ✅ **Modelos**: Nome e marca são obrigatórios
+- ✅ **Cores**: Nome é obrigatório
+- ✅ **Fotos**: URLs válidas (mínimo 3 por veículo)
+
+### Validações de Negócio
+
+- ✅ Ano deve ser um número válido
+- ✅ Quilometragem deve ser um número positivo
+- ✅ Valor deve ser um número decimal positivo
+- ✅ URLs de fotos devem ser válidas
+- ✅ Relacionamentos devem existir (marca, modelo, cor)
+
+---
+
+## 🔐 Segurança
+
+### Autenticação
+
+- ✅ Autenticação nativa do Laravel
+- ✅ Senhas criptografadas com bcrypt
+- ✅ Proteção contra CSRF
+
+### Autorização
+
+- ✅ Apenas usuários autenticados podem acessar a área administrativa
+- ✅ Middleware de autenticação em rotas protegidas
+- ✅ Validação de permissões
+
+---
+
+## 📚 Recursos Laravel Utilizados
+
+- ✅ **Autenticação**: Laravel Auth (login, registro, logout)
+- ✅ **Roteamento**: Routes com middlewares
+- ✅ **Controllers**: MVC pattern
+- ✅ **Models**: Eloquent ORM com relacionamentos
+- ✅ **Migrations**: Versionamento do banco de dados
+- ✅ **Seeders**: População de dados de teste
+- ✅ **Validação**: Form Request Validation
+- ✅ **Templates**: Blade com @extends, @section e @yield
+- ✅ **Relacionamentos**: hasMany, belongsTo, belongsToMany
+
+---
+
+## 🐛 Solução de Problemas
+
+### Erro: "Class not found" ao executar migrations
+
+**Solução**: Execute `composer dump-autoload`
+
+```bash
+composer dump-autoload
+php artisan migrate
+```
+
+### Erro: "SQLSTATE[HY000]: General error"
+
+**Solução**: Verifique as credenciais do banco de dados no `.env`
+
+```bash
+# Teste a conexão
+php artisan tinker
+>>> DB::connection()->getPdo();
+```
+
+### Erro de permissões em storage/
+
+**Solução**: Ajuste as permissões dos diretórios
+
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
+### Erro: "No application encryption key has been specified"
+
+**Solução**: Gere a chave da aplicação
+
+```bash
+php artisan key:generate
+```
+
+### Banco de dados não existe
+
+**Solução**: Crie o banco manualmente
+
+```bash
+# No MySQL
+mysql -u root -p
+CREATE DATABASE hs_automoveis;
+EXIT;
+
+# Depois execute as migrations
+php artisan migrate
+```
+
+### Seeders não funcionam
+
+**Solução**: Verifique a ordem de execução
+
+```bash
+# Resetar e popular (CUIDADO: apaga todos os dados!)
+php artisan migrate:fresh --seed
+
+# Ou execute manualmente na ordem correta
+php artisan db:seed --class=MarcasSeeder
+php artisan db:seed --class=ModelosSeeder
+php artisan db:seed --class=CoresSeeder
+php artisan db:seed --class=VeiculosSeeder
+php artisan db:seed --class=FotoVeiculosSeeder
+```
+
+---
 
 ## 🔧 Comandos Úteis
 
+### Gerenciamento de Cache
+
 ```bash
-# Limpar cache
+# Limpar todos os caches
 php artisan cache:clear
+
+# Limpar cache de configuração
 php artisan config:clear
+
+# Limpar cache de views
 php artisan view:clear
 
-# Recriar banco de dados (CUIDADO: apaga todos os dados)
+# Limpar tudo
+php artisan optimize:clear
+```
+
+### Gerenciamento do Banco de Dados
+
+```bash
+# Ver status das migrations
+php artisan migrate:status
+
+# Reverter última migration
+php artisan migrate:rollback
+
+# Reverter todas as migrations
+php artisan migrate:reset
+
+# Resetar e popular (CUIDADO!)
 php artisan migrate:fresh --seed
 
-# Criar novo usuário admin manualmente
+# Executar um seeder específico
+php artisan db:seed --class=UsersSeeder
+```
+
+### Tinker (Shell Interativo)
+
+```bash
+# Acessar o shell do Laravel
 php artisan tinker
+
+# Criar usuário manualmente
 >>> $user = new App\Models\User();
 >>> $user->name = 'Admin';
 >>> $user->email = 'admin@admin.com';
 >>> $user->password = Hash::make('123456');
 >>> $user->save();
+
+# Listar usuários
+>>> App\Models\User::all();
+
+# Deletar usuário
+>>> App\Models\User::find(1)->delete();
 ```
 
-## 📖 Recursos do Laravel Utilizados
+### Assets
 
-- ✅ Autenticação nativa do Laravel
-- ✅ Roteamento e Controllers
-- ✅ Validação de formulários
-- ✅ Templates com `@extends`, `@section` e `@yield`
-- ✅ Relacionamentos Eloquent (hasMany, belongsTo)
-- ✅ Migrations e Seeders
-
-## 🐛 Solução de Problemas
-
-### Erro ao executar migrations
-
-Se houver erro de foreign key, certifique-se de que as migrations estão na ordem correta:
-1. `create_marcas_table`
-2. `create_cores_table`
-3. `create_modelos_table` (depende de marcas)
-4. `create_veiculos_table` (depende de marcas, modelos e cores)
-5. `create_foto_veiculos_table` (depende de veículos)
-
-### Erro de permissões
-
-Se houver problemas com permissões de arquivos:
 ```bash
-chmod -R 775 storage bootstrap/cache
+# Compilar assets em desenvolvimento
+npm run dev
+
+# Compilar assets para produção
+npm run build
+
+# Watch para mudanças em tempo real
+npm run watch
 ```
+
+---
+
+## 📖 Documentação Adicional
+
+### Seeders
+
+Para mais informações sobre os seeders e como personalizar os dados, consulte o arquivo `GUIA_SEEDERS.md`:
+
+```bash
+# Dentro da pasta database/seeders/
+cat GUIA_SEEDERS.md
+```
+
+### Laravel Documentation
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [Laravel Eloquent](https://laravel.com/docs/eloquent)
+- [Laravel Blade](https://laravel.com/docs/blade)
+- [Laravel Authentication](https://laravel.com/docs/authentication)
+
+---
+
+## 📋 Checklist
+
+- ✅ Desenvolvido em **Laravel**
+- ✅ Autenticação de usuário com email e senha
+- ✅ Banco de dados **MySQL** configurado e funcional
+- ✅ Área pública com listagem e detalhes de veículos
+- ✅ Área administrativa restrita a usuários autenticados
+- ✅ CRUD completo para marcas, modelos, cores e veículos
+- ✅ Validação de campos obrigatórios (ano, quilometragem, valor)
+- ✅ Mínimo de 3 fotos por veículo (via URLs)
+- ✅ Template visual com Blade (@section, @yield)
+- ✅ Uso de Bootstrap para estilização
+- ✅ README.md com instruções de execução
+- ✅ Credenciais de administrador documentadas
+- ✅ Seeders para popular dados automaticamente
+
+---
 
 ## 👤 Autor
 
-Desenvolvido como trabalho acadêmico.
+**Hugo**
 
-## 📄 Licença
+---
 
-Este projeto é um trabalho acadêmico.
+## 💡 Dicas Importantes
 
-Crie o readme.MD para mim, o projeto foi baseado nesse escopo, 
+1. **Backup do Banco**: Sempre faça backup antes de executar `migrate:fresh --seed`
+2. **Variáveis de Ambiente**: Nunca compartilhe o arquivo `.env` com credenciais reais
+3. **Senhas**: Altere as senhas padrão em produção
+4. **Imagens**: As URLs das imagens nos seeders são reais e podem mudar
 
-🧩 Descrição Geral
-O aluno deverá desenvolver uma aplicação em Laravel com autenticação de usuário e senha, que simule um site de venda de veículos, semelhante aos portais Carros.com.br, iCarros ou Webmotors.
+---
 
-O sistema deverá possuir duas áreas distintas:
+## 🤝 Suporte
 
-Área Pública: onde o visitante poderá visualizar todos os veículos disponíveis para venda.
-Área Administrativa: restrita ao administrador autenticado, onde será possível gerenciar marcas, modelos, cores e veículos.
-🚘 Requisitos da Área Pública
-Exibir uma listagem com todos os veículos cadastrados.
-Cada veículo deve mostrar:
-Foto principal (imagem via link);
-Marca, modelo e cor;
-Ano de fabricação;
-Quilometragem atual;
-Valor total;
-Campo de detalhes (descrição textual).
-Ao clicar em um veículo, deve ser aberta uma página de detalhes com todas as informações e as demais fotos do carro.
-🔐 Requisitos da Área Administrativa
-Somente o administrador autenticado poderá acessar.
-Deverá conter:
-Cadastro de marcas;
-Cadastro de modelos;
-Cadastro de cores;
-Cadastro completo de veículos;
-Cada veículo deve ter no mínimo 3 fotos (armazenadas como links, não upload).
-Os campos ano, quilometragem e valor são obrigatórios.
-O administrador poderá:
-Adicionar novos veículos;
-Editar informações existentes;
-Excluir registros.
-🎨 Requisitos de Template e Layout
-O site deverá possuir um template visual (layout base), utilizando as boas práticas de uso de templates no Laravel com @section e @yield.
-Trabalhos que não utilizarem templates não serão corrigidos.
-Não adianta o site estar funcional e feio — notas maiores serão atribuídas aos trabalhos visualmente bem elaborados, com boa estética, organização e identidade visual.
-É permitido o uso de frameworks CSS.
-⚙️ Tecnologias e Regras
-O sistema deve ser desenvolvido em Laravel
-Deve conter validação de login e senha (autenticação básica Laravel).
-Banco de dados configurado e funcional (MySQL).
-É permitido o uso de Bootstrap ou outro framework CSS para estilização.
-Não é necessário upload real de imagens, apenas links (URLs) válidos.
-📤 Entrega
+Se encontrar problemas, verifique:
 
-Deve estar claro no README.md:
-Como rodar o projeto (comandos do Laravel);
-Usuário e senha de acesso do administrador.
-DEVE possuir prints (imagens), de todas as telas do site
-📚 Dica
-Utilize os recursos nativos do Laravel para:
+1. Se o PHP e MySQL estão instalados e rodando
+2. Se as dependências foram instaladas (`composer install` e `npm install`)
+3. Se o arquivo `.env` está configurado corretamente
+4. Se as migrations foram executadas (`php artisan migrate`)
+5. Se os seeders foram executados (`php artisan db:seed`)
 
-Autenticação;
-Roteamento e Controllers para separar a área pública e administrativa;
-Validação de formulários e campos obrigatórios;
+---
+
+Última atualização: **Novembro de 2025**
